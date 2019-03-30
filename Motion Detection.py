@@ -4,10 +4,12 @@ import numpy as np
 from pynput.mouse import Controller, Button
 import wx
 import time
+from win10toast import ToastNotifier
 
 background = None
 app = wx.App(False)
 mouse = Controller()
+toaster = ToastNotifier()
 max_x, max_y = wx.GetDisplaySize()
 # mouse.position = (100, 100)
 
@@ -18,7 +20,7 @@ press_time = 0
 
 
 def caliberate(x, y, w, h, hull):
-    global caliberated, cal_time
+    global caliberated, cal_time, old_area
     time.sleep(0.1)
 
     if cal_time != 0:
@@ -26,10 +28,12 @@ def caliberate(x, y, w, h, hull):
 
     if cal_time > 5:
         print("Caliberated")
+        toaster.show_toast("GCM - Gesture Controlled Mouse", "Caliberated", duration=0.5)
+
         old_area = cv2.contourArea(hull)
         caliberated = 1
         print(max_x, max_y)
-        mouse.position = (max_x/2, max_y/2)
+        mouse.position = (max_x/2 - 250, max_y/2)
 
     elif cal_time < 6 and x < 175 < (x+w) and y < 150 < (y+h):
         cal_time += 1
@@ -45,17 +49,18 @@ def updateMouse(x, y, hull):
     area = cv2.contourArea(hull)
     print(area, press_time)
 
-    if area < 8000 and press_time < 15:
+    if area < old_area and press_time < 15:
         press_time += 1
     else:
-        if 5 < press_time and area > 10000:
+        if 5 < press_time and area > old_area:
             print("Clicked")
+            toaster.show_toast("GCM", "Button Clicked", duration=0.5)
             mouse.click(Button.left)
             press_time = 0
 
         else:
-            if press_time > 10:
-                if area < 10000:
+            if press_time > 100:
+                if area < old_area + 2000:
                     print("Hold")
                     mouse.press(Button.left)
                     pressed = 1
@@ -72,7 +77,7 @@ def updateMouse(x, y, hull):
                 old_x = 0
             if y == 300 or y == 0:
                 old_y = 0
-            mouse.move(10*(x-old_x), 10*(y-old_y))
+            mouse.move(7*(x-old_x), 7*(y-old_y))
             old_x, old_y = x, y
         if press_time > 1:
             press_time -= 1
@@ -92,6 +97,7 @@ def counts(hull):
             print(cal_time)
         if cal_time == 0:
             print("Undone")
+            toaster.show_toast("GCM - Gesture Controlled Mouse", "Un caliberated", duration=0.5)
             caliberated = 0
     elif caliberated == 1:
         updateMouse(x, y, hull)
