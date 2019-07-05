@@ -41,6 +41,17 @@ pip install wxPython
 
 `python Gesture-Control.py`
 
+**4. Wait for camera to pop and hold your hand still at center of ROI**
+
+**5. When a message of `Calibrated` appears, mouse your hand slowly to test the mouse**
+- Move left, right, up, down for mouse movement
+- Close-Open grip in 1 second for MOUSE1 or MouseClick
+- Hold grip for MouseDrag, Release grip for MouseRelease to drag and drop
+
+**6. Remove your mouse from ROI to get control back to mouse**
+
+**7. Press 'q' on keyboard to stop**
+
 ## Future Scope:
   - Converting basic Image Processing into Machine Learning to enable custom gesture-action combo
   
