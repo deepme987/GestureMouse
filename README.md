@@ -13,11 +13,16 @@
 
 &nbsp;&nbsp; To check, type `pip freeze` in cmd and look for following external packages
 ```
-opencv-python
-imutils
-win10toast
-pynput
-wx
+imutils==0.5.2
+numpy==1.16.4
+opencv-python==4.1.0.25
+Pillow==6.1.0
+pynput==1.4.2
+pypiwin32==223
+pywin32==224
+six==1.12.0
+win10toast==0.9
+wxPython==4.0.6
 ```
 
 &nbsp;&nbsp; If you don't find any of the libraries, install them with pip:
@@ -29,7 +34,7 @@ pip install opencv-python
 pip install imutils
 pip install win10toast
 pip install pynput
-pip install wx
+pip install wxPython 
 ```
     
 **3. Once everything is ready, launch the Gesture Control using:**
@@ -49,3 +54,4 @@ pip install wx
     
   - Using Voice Control to enable the script(Saving battery)
 
+### Any bug reports or feedbacks are appreciated
