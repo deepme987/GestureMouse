@@ -203,8 +203,7 @@ if __name__ == "__main__":
         num_frames += 1
         cv2.imshow("Input", cache)
 
-        keypress = cv2.waitKey(1) & 0xFF
-        if keypress == 27:                               # Exit on "Esc"
+        if cv2.waitKey(20) & 0xFF == ord('q'):          # Exit on 'q'
             break
 
     # Free up resources on exit
