@@ -34,7 +34,7 @@ pip install wx
     
 **3. Once everything is ready, launch the Gesture Control using:**
 
-`python "Gesture Control.py"`
+`python Gesture-Control.py`
 
 ## Future Scope:
   - Converting basic Image Processing into Machine Learning to enable custom gesture-action combo
