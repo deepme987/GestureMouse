@@ -52,6 +52,11 @@ pip install wxPython
 
 **7. Press 'q' on keyboard to stop**
 
+## For better results:
+- Keep your camera still
+- Stay out of ROI duing initialisation
+- Keep dark elegant or plain white background
+
 ## Future Scope:
   - Converting basic Image Processing into Machine Learning to enable custom gesture-action combo
   
